@@ -1,70 +1,140 @@
-# Getting Started with Create React App
+# ⚡ StudyVault — Student Resources Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A clean, fast React app that lets students upload, search, and browse academic resources — organized by type.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+- **Upload Resources** — Add a title, pick a resource type, and attach any file
+- **View Files in Browser** — Uploaded files open directly in a new browser tab using the File API
+- **Search** — Filter resources instantly by title or type from the home page
+- **Browse by Type** — Navigate to dedicated sections for PPT, PDF, Doc, Question Bank, and Question Papers
+- **Delete Your Uploads** — Resources you upload show a delete button; demo/shared resources do not
+- **Live Upload Count** — Each type button shows how many resources are in that category
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🖥️ Preview
 
-### `npm test`
+| Home Page | Resources Page |
+|-----------|----------------|
+| Upload form, type navigator, recent uploads with search | Sidebar filter by type, resource grid |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🗂️ Project Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+student-resources/
+├── index.html
+├── vite.config.js
+├── package.json
+└── src/
+    ├── main.jsx              # Entry point
+    ├── App.jsx               # Root component — state & page routing
+    ├── App.css               # Global design system (fonts, colors, shared classes)
+    ├── components/
+    │   ├── ResourceCard.jsx  # Reusable card — view, delete, badge, timestamp
+    │   └── ResourceCard.css
+    └── pages/
+        ├── HomePage.jsx      # Upload form + search + browse by type
+        ├── HomePage.css
+        ├── ResourcesPage.jsx # Sidebar type filter + resource grid
+        └── ResourcesPage.css
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🚀 Getting Started
 
-### `npm run eject`
+### Prerequisites
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- [Node.js](https://nodejs.org/) v18 or higher
+- npm (comes with Node)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Installation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+# Clone the repository
+git clone https://github.com/your-username/student-resources.git
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# Navigate into the project
+cd student-resources
 
-## Learn More
+# Install dependencies
+npm install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Start the development server
+npm run dev
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-### Code Splitting
+### Build for Production
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm run build
+```
 
-### Analyzing the Bundle Size
+Output goes to the `dist/` folder, ready to deploy on Vercel, Netlify, or GitHub Pages.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 🛠️ Tech Stack
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+| Tool | Purpose |
+|------|---------|
+| [React 18](https://react.dev/) | UI library |
+| [Vite](https://vitejs.dev/) | Build tool & dev server |
+| [Syne](https://fonts.google.com/specimen/Syne) + [DM Sans](https://fonts.google.com/specimen/DM+Sans) | Typography |
+| Browser File API (`URL.createObjectURL`) | In-browser file viewing |
+| CSS Variables | Theming and design tokens |
 
-### Advanced Configuration
+No external UI libraries or state management packages — kept intentionally minimal.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 📋 Resource Types Supported
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+| Type | Description |
+|------|-------------|
+| 📄 PDF | Lecture notes, reference material |
+| 📊 PPT | Presentation slides |
+| 📝 Doc | Word documents, assignments |
+| 🗂️ Question Bank | Collection of practice questions |
+| 📋 Question Papers | Previous year / mock exam papers |
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🔑 Key Implementation Notes
+
+**File Viewing** — uses `URL.createObjectURL()` to generate a temporary browser URL from the in-memory `File` object. PDFs and images render inline in the browser; other formats (PPT, DOCX) trigger a download. The URL is revoked after 10 seconds to free memory.
+
+**Delete Permission** — each resource carries an `uploadedByMe` boolean. Resources uploaded in the current session have this set to `true` and show a delete button. Pre-loaded demo resources have it set to `false` and cannot be deleted — simulating a shared/read-only resource scenario.
+
+**State Management** — all state lives in `App.jsx` and flows down via props. No Redux or Context API needed given the scope.
+
+**No Persistence** — data resets on page refresh (no backend or localStorage). This is by design for simplicity; see the roadmap below for how to extend it.
+
+---
+
+## 🗺️ Roadmap / Possible Extensions
+
+- [ ] Backend integration (Node/Express or Firebase) for persistent storage
+- [ ] User authentication — link uploads to a real user account
+- [ ] File preview modal (instead of opening a new tab)
+- [ ] Download button alongside View
+- [ ] Drag-and-drop file upload
+- [ ] Subject/course tagging and filtering
+- [ ] Dark mode toggle
+
+---
+
+## 📄 License
+
+MIT — free to use, modify, and distribute.
+
+---
+
+> Built with React + Vite. Fonts from Google Fonts.
