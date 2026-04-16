@@ -1,38 +1,108 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap");
+
+:root {
+  --bg: #f5f3ee;
+  --surface: #ffffff;
+  --surface2: #f0ede6;
+  --text: #1a1814;
+  --text-muted: #6b6760;
+  --border: #e0dbd0;
+  --accent: #2d5be3;
+  --accent-light: #e8eefb;
+  --accent2: #e85d26;
+  --accent2-light: #fdf0ea;
+  --success: #1a8a5a;
+  --success-light: #e8f5ef;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.1);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  font-family: "DM Sans", sans-serif;
+  background: var(--bg);
+  color: var(--text);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+/* ---- Typography ---- */
+h1, h2, h3, h4 {
+  font-family: "Syne", sans-serif;
+}
+
+/* ---- Shared Components ---- */
+.btn {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.18s ease;
+}
+
+.btn-primary {
+  background: var(--accent);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.btn-primary:hover {
+  background: #1e4acc;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(45, 91, 227, 0.35);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
 }
+
+.btn-ghost:hover {
+  background: var(--surface2);
+}
+
+.btn-accent2 {
+  background: var(--accent2);
+  color: white;
+}
+
+.btn-accent2:hover {
+  background: #c74e1e;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(232, 93, 38, 0.35);
+}
+
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: "Syne", sans-serif;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.type-PDF { background: #fde8e8; color: #b91c1c; }
+.type-PPT { background: #fef3c7; color: #92400e; }
+.type-Doc { background: #dbeafe; color: #1e40af; }
+.type-QuestionBank { background: #f3e8ff; color: #6b21a8; }
+.type-QuestionPapers { background: #d1fae5; color: #065f46; }
