@@ -12,23 +12,33 @@ export default function App() {
       title: "Data Structures Notes",
       type: "PDF",
       uploadedAt: new Date(Date.now() - 3600000 * 2),
+      uploadedByMe: false,
     },
     {
       id: 2,
       title: "OS Concepts Slides",
       type: "PPT",
       uploadedAt: new Date(Date.now() - 3600000 * 5),
+      uploadedByMe: false,
     },
     {
       id: 3,
       title: "DBMS Assignment",
       type: "Doc",
       uploadedAt: new Date(Date.now() - 3600000 * 10),
+      uploadedByMe: false,
     },
   ]);
 
   function addResource(resource) {
-    setResources((prev) => [{ ...resource, id: Date.now() }, ...prev]);
+    setResources((prev) => [
+      { ...resource, id: Date.now(), uploadedByMe: true },
+      ...prev,
+    ]);
+  }
+
+  function deleteResource(id) {
+    setResources((prev) => prev.filter((r) => r.id !== id));
   }
 
   function navigateTo(type) {
@@ -48,6 +58,7 @@ export default function App() {
           resources={resources}
           onAddResource={addResource}
           onNavigate={navigateTo}
+          onDelete={deleteResource}
         />
       ) : (
         <ResourcesPage
@@ -55,6 +66,7 @@ export default function App() {
           activeType={activeType}
           setActiveType={setActiveType}
           onGoHome={goHome}
+          onDelete={deleteResource}
         />
       )}
     </div>

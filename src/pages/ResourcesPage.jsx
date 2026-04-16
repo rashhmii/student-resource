@@ -19,7 +19,7 @@ function timeAgo(date) {
   return `${Math.floor(diff / 86400)}d ago`;
 }
 
-export default function ResourcesPage({ resources, activeType, setActiveType, onGoHome }) {
+export default function ResourcesPage({ resources, activeType, setActiveType, onGoHome, onDelete }) {
   const filtered = activeType
     ? resources.filter((r) => r.type === activeType)
     : resources;
@@ -96,7 +96,7 @@ export default function ResourcesPage({ resources, activeType, setActiveType, on
           ) : (
             <div className="res-grid">
               {filtered.map((r) => (
-                <ResourceCard key={r.id} resource={r} timeAgo={timeAgo} />
+                <ResourceCard key={r.id} resource={r} timeAgo={timeAgo} onDelete={onDelete} />
               ))}
             </div>
           )}

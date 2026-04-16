@@ -55,19 +55,47 @@
   color: var(--text-muted);
 }
 
-.card-view-btn {
-  font-size: 12px;
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-download-btn {
+  font-size: 13px;
   font-weight: 500;
-  color: var(--accent);
-  background: var(--accent-light);
-  border: none;
-  padding: 5px 12px;
-  border-radius: 20px;
-  cursor: pointer;
   font-family: "DM Sans", sans-serif;
+  color: var(--accent);
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 12px;
+  cursor: pointer;
   transition: background 0.15s;
 }
 
-.card-view-btn:hover {
+.card-download-btn:hover {
   background: #d1e0f9;
 }
+
+.card-delete-btn {
+  font-size: 13px;
+  font-weight: 500;
+  font-family: "DM Sans", sans-serif;
+  color: red;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 12px;
+  cursor: pointer;
+  line-height: 1;
+  transition: all 0.15s;
+  
+}
+
+.card-delete-btn:hover {
+  background: #fde8e8;
+  border-color: #b91c1c;
+}
+
+

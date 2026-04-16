@@ -22,7 +22,7 @@ function timeAgo(date) {
   return `${Math.floor(diff / 86400)}d ago`;
 }
 
-export default function HomePage({ resources, onAddResource, onNavigate }) {
+export default function HomePage({ resources, onAddResource, onNavigate, onDelete }) {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("PDF");
   const [file, setFile] = useState(null);
@@ -38,6 +38,7 @@ export default function HomePage({ resources, onAddResource, onNavigate }) {
       type,
       uploadedAt: new Date(),
       fileName: file.name,
+      fileObject: file,
     });
     setTitle("");
     setFile(null);
@@ -182,7 +183,7 @@ export default function HomePage({ resources, onAddResource, onNavigate }) {
           ) : (
             <div className="resource-grid">
               {filtered.map((r) => (
-                <ResourceCard key={r.id} resource={r} timeAgo={timeAgo} />
+                <ResourceCard key={r.id} resource={r} timeAgo={timeAgo} onDelete={onDelete} />
               ))}
             </div>
           )}
